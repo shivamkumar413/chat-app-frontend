@@ -1,25 +1,47 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import { Separator } from "@/components/ui/separator"
+import { useNavigate } from "react-router-dom"
+import { AlertTriangle } from "lucide-react"
+import { LoaderCircle } from "lucide-react"
 
-export const SignupCard = ()=>{
+export const SignupCard = ({signupForm,setSignupForm,validationError,onSignupSubmit,isPending,isSuccess,error})=>{
 
-    const [signupForm,setSignupForm] = useState({
-        email : '',
-        password : '',
-        confirmPassword : '',
-        username : ''
-    })
+    const navigate = useNavigate()
 
     return(
         <Card className="h-full w-full">
             <CardHeader>
                 <CardTitle>Sign up</CardTitle>
                 <CardDescription>Signup to create new account</CardDescription>
+
+                {
+                    validationError &&
+                        <div className="flex bg-gray-200 p-2 rounded-md">
+                            <span className="text-red-400 mr-2"><AlertTriangle /></span>
+                            <span className="text-gray-700">{validationError.message}</span>
+                        </div>
+                }
+
+                { error &&
+                    <div className="flex bg-gray-200 p-2 rounded-md">
+                        <span className="text-red-400 mr-2"><AlertTriangle /></span>
+                        <span className="text-gray-700">{error.message}</span>
+                    </div>    
+                }
+
+                {
+                    isSuccess && 
+                        <LoaderCircle className="animate-spin"/>
+                }
+            
             </CardHeader>
             <CardContent>
-                <form className="space-y-3">
+                <form 
+                    className="space-y-3" 
+                    onSubmit={onSignupSubmit}
+                >
                     <Input 
                         type={"email"}
                         placeholder="Email"
@@ -28,17 +50,17 @@ export const SignupCard = ()=>{
                             setSignupForm({...signupForm,email : e.target.value})
                         }}
                         value={signupForm.email}
-                        disabled={false}
+                        disabled={isPending}
                     />
                     <Input 
-                        type={"email"}
+                        type={"text"}
                         placeholder="Username"
                         required
                         onChange={(e)=>{
                             setSignupForm({...signupForm,username : e.target.value})
                         }}
                         value={signupForm.username}
-                        disabled={false}
+                        disabled={isPending}
                     />
                     <Input 
                         type={"password"}
@@ -48,7 +70,7 @@ export const SignupCard = ()=>{
                             setSignupForm({...signupForm,password : e.target.value})
                         }}
                         value={signupForm.password}
-                        disabled={false}
+                        disabled={isPending}
                     />
                     <Input 
                         type={"password"}
@@ -58,11 +80,11 @@ export const SignupCard = ()=>{
                             setSignupForm({...signupForm,confirmPassword : e.target.value})
                         }}
                         value={signupForm.confirmPassword}
-                        disabled={false}
+                        disabled={isPending}
                     />
 
                     <Button
-                        disabled={false}
+                        disabled={isPending}
                         size="lg"
                         type="submit"
                         className="w-full"
@@ -70,6 +92,18 @@ export const SignupCard = ()=>{
                         Continue
                     </Button>
                 </form>
+
+                <Separator className="my-6"></Separator>
+
+                <div className="text-sm text-gray-500">
+                    Already have an account ? {' '}
+                    <span 
+                        className="hover:underline cursor-pointer"
+                        onClick={()=>navigate('/auth/signin')}
+                        >
+                            Sign in
+                    </span>
+                </div>
             </CardContent>
         </Card>
     )
