@@ -1,13 +1,20 @@
 import { useMutation } from "@tanstack/react-query";
 import { userSignin } from "@/apis/auth/index.js";
+import { toast } from "sonner";
 
-export const useSignin = async ()=>{
-    const { isSuccess,isPending,error,mutate : signinMutation} = useMutation({
+export const useSignin = ()=>{
+    const { isSuccess,isPending,error,mutateAsync : signinMutation} = useMutation({
         mutationFn : userSignin,
-        onSuccess : (data)=>{
-            console.log("Successfully logged in ",data)
+        onSuccess : (response)=>{
+            toast.success("User sign in successfull")
+            console.log("Successfully logged in ",response.data)
+            const data = JSON.stringify(response.data.data)
+            const token = JSON.stringify(response.data.data.token)
+            localStorage.setItem('user',data)
+            localStorage.setItem('token',token)
         },
         onError : (error)=>{
+            toast.error(error.message)
             console.log(`Failed to signin ${error}`)
         }
     })
