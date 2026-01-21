@@ -1,17 +1,17 @@
-import { getAllWorkspace } from "@/apis/workspace/getAllWorkspace";
+import { getAllWorkspace } from "@/apis/workspace";
 import { useAuth } from "@/hooks/context/AuthContextHook";
 import { useQuery } from "@tanstack/react-query";
 
 export function useGetAllWorkspace(){
     console.log("At get all workspace")
     const {auth} = useAuth()
-    const {data,error,isPending,isSuccess} = useQuery({
+    const {data : workspaces,error,isPending,isSuccess} = useQuery({
         queryFn : ()=>getAllWorkspace(auth?.token),
         queryKey : ['fetchworkspaces'],
     })
 
     return {
-        data,
+        workspaces,
         error,
         isPending,
         isSuccess

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { SignupCard } from "./SignupCard"
-import { useSignup } from "@/hooks/apis/mutations/useSignup"
+import { useSignup } from "@/hooks/apis/auth/useSignup"
 import { useNavigate } from "react-router-dom"
 
 export const SignupCardContainer = ()=>{
