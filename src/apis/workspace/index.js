@@ -39,3 +39,19 @@ export const createWorkspace = async ({workspaceName,description,token})=>{
         throw error;
     }
 }
+
+export const getWorkspaceDetails = async ({workspaceId,token})=>{
+    try {
+        const response = await axiosInstance.get(`/workspace/:${workspaceId}`,{
+            headers : {
+                "x-access-token" : token
+            }
+        })
+
+        console.log("Response at get workspace details : ",response)
+        return response
+    } catch (error) {
+        console.log("Error getting details of the workspace : ",error)
+        throw error;
+    }
+}
