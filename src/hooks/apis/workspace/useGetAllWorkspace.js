@@ -8,6 +8,7 @@ export function useGetAllWorkspace(){
     const {data : workspaces,error,isPending,isSuccess} = useQuery({
         queryFn : ()=>getAllWorkspace(auth?.token),
         queryKey : ['fetchworkspaces'],
+        staleTime : 30000
     })
 
     return {
