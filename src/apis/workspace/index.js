@@ -42,7 +42,7 @@ export const createWorkspace = async ({workspaceName,description,token})=>{
 
 export const getWorkspaceDetails = async ({workspaceId,token})=>{
     try {
-        const response = await axiosInstance.get(`/workspace/:${workspaceId}`,{
+        const response = await axiosInstance.get(`/workspace/${workspaceId}`,{
             headers : {
                 "x-access-token" : token
             }
