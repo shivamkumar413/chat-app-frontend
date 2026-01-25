@@ -21,7 +21,7 @@ export const WorkspaceSwitcher = ()=>{
                     className={'size-12 relative overflow-hidden bg-[#2B2D31] hover:bg-[#35363C] font-semibold text-xl'}
                     
                 >
-                    {isPending ? <LucideLoader2 className="animate-spin size-5"/> : workspaceDetails?.data?.data?.name[0].toUpperCase()}
+                    {isPending ? <LucideLoader2 className="animate-spin size-5"/> : workspaceDetails?.name[0].toUpperCase()}
                 </Button>
             </DropdownMenuTrigger>
 
@@ -29,7 +29,7 @@ export const WorkspaceSwitcher = ()=>{
                 <DropdownMenuItem
                     className={'flex flex-col items-center justify-start cursor-pointer'}
                 >
-                    {workspaceDetails?.data?.data?.name}
+                    {workspaceDetails?.name}
                     <span className="text-xs font-semibold">
                         (Active Workspace)
                     </span>
@@ -37,7 +37,7 @@ export const WorkspaceSwitcher = ()=>{
 
                 
                     {workspaces?.map((workspace)=>{
-                        if(workspaceDetails?.data?.data?._id !== workspace?._id){
+                        if(workspaceDetails?._id !== workspace?._id){
                             return(
                                
                                 <DropdownMenuItem 
