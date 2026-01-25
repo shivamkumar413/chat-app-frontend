@@ -49,9 +49,27 @@ export const getWorkspaceDetails = async ({workspaceId,token})=>{
         })
 
         console.log("Response at get workspace details : ",response)
-        return response
+        return response?.data?.data
     } catch (error) {
         console.log("Error getting details of the workspace : ",error)
+        throw error;
+    }
+}
+
+export const getIsUserAdminOfWorkspace = async({workspaceId,token})=>{
+    try {
+    const response = await axiosInstance.get(`/user/${workspaceId}`,
+        {
+            headers : {
+                "x-access-token" : token
+            }
+        })
+
+        //console.log("Reseponse at is user admin of ws : ",response)
+        return response?.data?.data;
+
+    } catch (error) {
+        console.log("Error at get is user admin of workspace : ",error)
         throw error;
     }
 }
