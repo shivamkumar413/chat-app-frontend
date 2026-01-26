@@ -1,15 +1,16 @@
 import { deleteWorkspace } from "@/apis/workspace";
 import { useAuth } from "@/hooks/context/AuthContextHook";
 import { useMutation } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
 
-export function useDeleteWorkspace(){
+export function useDeleteWorkspace(workspaceId){
 
-    const { workspaceId } = useParams()
     const { auth } = useAuth()
+    
+    // console.log("")
+    console.log("Delete workspace triggered with workspace id : ",workspaceId)
 
     const {isSuccess,isPending,mutateAsync : deleteWorkspaceMutate ,error} = useMutation({
-        mutationFn : ()=>deleteWorkspace({workspaceId,toekn : auth?.token}),
+        mutationFn : ()=>deleteWorkspace({workspaceId,token : auth?.token}),
         onSuccess : (response)=>{
             console.log("Deleted successfully : ",response)
         },

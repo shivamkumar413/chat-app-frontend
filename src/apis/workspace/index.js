@@ -95,8 +95,9 @@ export const deleteWorkspace = async ({workspaceId,token})=>{
 
 export const updateWorkspace = async ({workspaceId,workspaceName,token})=>{
     try {
+        console.log("at workspace update api : ",workspaceId,workspaceName,token)
         const response = await axiosInstance.put(`/workspace/${workspaceId}`,
-            {workspaceName},
+            {name : workspaceName},
             {
                 headers : {
                     "x-access-token" : token

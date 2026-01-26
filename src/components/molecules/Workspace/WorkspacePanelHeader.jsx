@@ -8,12 +8,10 @@ import { useEffect } from "react"
 
 export const WorkspacePanelHeader = ({workspace})=>{
 
-    const { IsUserAdminOfWs,isFetching,isSuccess,error } = useGetIsUserAdminOfWorkspace()
-    const { setOpenPreferencesModal,setWorkspaceName } = useWorkspacePanelPreferencesHook()
 
-    useEffect(()=>{
-        setWorkspaceName(workspace?.name)
-    },[])
+    const { IsUserAdminOfWs,isFetching,isSuccess,error } = useGetIsUserAdminOfWorkspace()
+    const { setOpenPreferencesModal } = useWorkspacePanelPreferencesHook()
+
 
     //console.log("ws response for if user is admin : ",IsUserAdminOfWs?.isUserAdmin)
     return(
