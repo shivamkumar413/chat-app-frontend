@@ -4,11 +4,14 @@ import { useGetIsUserAdminOfWorkspace } from "@/hooks/apis/workspace/useGetIsUse
 import { useWorkspacePanelPreferencesHook } from "@/hooks/context/WorkspacePanelPreferencesHook"
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu"
 import { ChevronDownIcon } from "lucide-react"
+import { useEffect } from "react"
 
 export const WorkspacePanelHeader = ({workspace})=>{
 
+
     const { IsUserAdminOfWs,isFetching,isSuccess,error } = useGetIsUserAdminOfWorkspace()
-    const { openPreferencesModal,setOpenPreferencesModal } = useWorkspacePanelPreferencesHook()
+    const { setOpenPreferencesModal } = useWorkspacePanelPreferencesHook()
+
 
     //console.log("ws response for if user is admin : ",IsUserAdminOfWs?.isUserAdmin)
     return(
@@ -58,11 +61,14 @@ export const WorkspacePanelHeader = ({workspace})=>{
                                 <>
                                     <DropdownMenuItem
                                         onClick={()=>setOpenPreferencesModal(true)}
+                                        className={'text-sm'}
                                     >
                                         Preferences
                                     </DropdownMenuItem>
 
-                                    <DropdownMenuItem>
+                                    <DropdownMenuItem
+                                        className={'text-sm'}
+                                    >
                                         Invite people to {workspace?.name}
                                     </DropdownMenuItem>
                                 </>

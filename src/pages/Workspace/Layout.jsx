@@ -14,9 +14,7 @@ export const WorkspaceLayout = ({children})=>{
         if(isPending) return
         console.log("Workspace details : ",workspaceDetails)
     },[isPending,isSuccess])
-    console.log("Group:", ResizablePanelGroup)
-    console.log("Panel:", ResizablePanel)
-    console.log("Handle:", ResizableHandle)
+
     return(
         <div className="h-screen">
             <WorkspaceNavBar />

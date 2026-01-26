@@ -23,7 +23,7 @@ export const WorkspaceNavBar = ()=>{
                 >
                     <SearchIcon className="size-5 text-white mr-2"/>
                     <span className="text-white text-xs">
-                        Search {workspaceDetails?.data?.data?.name || 'workspace'}
+                        Search {workspaceDetails?.name || 'workspace'}
                     </span>
                 </Button>
             </div>

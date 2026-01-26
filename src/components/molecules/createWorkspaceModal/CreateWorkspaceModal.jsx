@@ -3,15 +3,20 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Input } from "@/components/ui/input"
 import { useCreateWorkspace } from "@/hooks/apis/workspace/useCreateWorkspace"
 import { useCreateWorkspaceModal } from "@/hooks/context/CreateWorkspaceModalHook"
-import { DialogDescription } from "@radix-ui/react-dialog"
+import { DialogDescription } from "@/components/ui/dialog" 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useQueryClient } from "@tanstack/react-query"
+
 
 export const CreateWorkspaceModal = ()=>{
 
     const [workspaceName,setWorkspaceName] = useState('')
-    const { isCreateWorkspaceModalOpen, setIsCreateWorkspaceModalOpen } = useCreateWorkspaceModal()
+    const navigate = useNavigate()
+    const queryClient = useQueryClient()
 
-    const { isSuccess,isPending,error,createWorkspaceMutation } = useCreateWorkspace()
+    const { isCreateWorkspaceModalOpen, setIsCreateWorkspaceModalOpen } = useCreateWorkspaceModal()
+    const { createWorkspaceMutation } = useCreateWorkspace()
 
     function handleOpenChange(){
         setIsCreateWorkspaceModalOpen(false)
@@ -19,7 +24,7 @@ export const CreateWorkspaceModal = ()=>{
 
 
     async function handleCreateWorkspaceSubmit(e){
-        e.preventDefault()
+        //e.preventDefault()
         try {
             console.log("Inside handle fn")
             console.log("wsname at handle form fn : ",workspaceName)
@@ -29,6 +34,8 @@ export const CreateWorkspaceModal = ()=>{
             console.log(error)
             throw error
         }finally{
+            queryClient.invalidateQueries('fetchworkspaces')
+            navigate('/home')
             setIsCreateWorkspaceModalOpen(false)
             setWorkspaceName('')
         }
