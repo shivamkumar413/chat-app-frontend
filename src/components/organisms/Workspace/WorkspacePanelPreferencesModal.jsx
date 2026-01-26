@@ -1,10 +1,10 @@
 import { Dialog, DialogContent, DialogDescription, DialogHeader } from "@/components/ui/dialog"
 import { useWorkspacePanelPreferencesHook } from "@/hooks/context/WorkspacePanelPreferencesHook"
-import { DeleteIcon, LucideDelete, SquarePenIcon, Trash2Icon } from "lucide-react";
+import { SquarePenIcon, Trash2Icon } from "lucide-react";
 
 export const WorkpacePanelPreferencesModal = ()=>{
 
-    const { openPreferencesModal,setOpenPreferencesModal } = useWorkspacePanelPreferencesHook()
+    const { openPreferencesModal,setOpenPreferencesModal,workspaceName } = useWorkspacePanelPreferencesHook()
 
     function handleModalOpenChange(){
         setOpenPreferencesModal(false);
@@ -26,13 +26,23 @@ export const WorkpacePanelPreferencesModal = ()=>{
                 </DialogHeader>
 
                 <div className="flex w-full bg-gray-100 py-3 rounded-md justify-between items-center px-2">
-                    <p className="text-sm font-semibold">Edit Workspace</p>
-
+                    <div>
+                        <p className="text-sm font-semibold">Edit Workspace</p>
+                        <p className="text-xs">{workspaceName}</p>
+                    </div>
+                    
                     <SquarePenIcon className="text-xs"/>
                 </div>
 
-                <div className="flex w-full bg-gray-100 py-3 rounded-md justify-between items-center px-2">
-                    <p className="text-sm font-semibold">Delete Workspace</p>
+                <div 
+                    className="flex w-full bg-gray-100 py-3 rounded-md justify-between items-center px-2"
+                >
+                    <p  
+                        className="text-sm font-semibold"
+                    >
+                            Delete Workspace
+                    
+                    </p>
 
                     <Trash2Icon className="text-xs"/>
                 </div>
