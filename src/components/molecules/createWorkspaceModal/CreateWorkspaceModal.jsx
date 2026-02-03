@@ -47,8 +47,8 @@ export const CreateWorkspaceModal = ()=>{
         >
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle></DialogTitle>
-                    <DialogDescription></DialogDescription>
+                    <DialogTitle>Create Workspace</DialogTitle>
+                    <DialogDescription>Workspace Name</DialogDescription>
                 </DialogHeader>
 
                 <form 

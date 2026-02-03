@@ -9,11 +9,6 @@ export const WorkspaceSideBar = ()=>{
     const navigate = useNavigate()
     const { workspaceId } = useParams()
 
-    function handleChannelClick(e){
-        e.preventDefault()
-        navigate(`/workspace/${workspaceId}/channel`)
-        
-    }
 
     return(
         <>
@@ -29,7 +24,6 @@ export const WorkspaceSideBar = ()=>{
                     />
 
                     <WorkspaceSideBarButton 
-                        onClickHandler={handleChannelClick}
                         Icon={MessageCircleMore}
                         name={"DM's"}
                     />
