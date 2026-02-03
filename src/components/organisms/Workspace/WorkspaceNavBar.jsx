@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { useGetWorkspaceDetails } from "@/hooks/apis/workspace/useGetWorkspaceDetails"
-import { InfoIcon, LucideLoader2, SearchIcon } from "lucide-react"
+import { InfoIcon, LucideLoader2, SearchIcon, UserPlus2Icon } from "lucide-react"
 
 export const WorkspaceNavBar = ()=>{
 
@@ -16,19 +16,26 @@ export const WorkspaceNavBar = ()=>{
             className="bg-[#5865F2] w-screen h-10 flex items-center justify-center p-1.5"
         >
             <div className="w-1/3" />
-            <div>
+            <div className="flex itmes-center">
                 <Button 
                     size="sm"
-                    className='bg-accent/25 hover:bg-accent/15 w- h-7 px-2'
+                    className='bg-accent/25 hover:bg-accent/15 h-7 px-2'
                 >
                     <SearchIcon className="size-5 text-white mr-2"/>
                     <span className="text-white text-xs">
                         Search {workspaceDetails?.name || 'workspace'}
                     </span>
                 </Button>
+
+                <Button size="sm"
+                    className='ml-4 bg-accent/25 hover:bg-accent/15 h-7 px-2'
+                >
+                        <UserPlus2Icon className="size-5 text-white "/>
+                    <span className="text-white text-sm">Add Friends</span>
+                </Button>
             </div>
             
-
+        
             <div className="ml-auto flex items-center justify-end mr-3">
                 <Button 
                     variant="transparent"

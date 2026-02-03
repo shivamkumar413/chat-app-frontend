@@ -3,8 +3,7 @@ import { DropdownMenu, DropdownMenuItem, DropdownMenuTrigger } from "@/component
 import { useGetIsUserAdminOfWorkspace } from "@/hooks/apis/workspace/useGetIsUserAminOfWorkspace"
 import { useWorkspacePanelPreferencesHook } from "@/hooks/context/WorkspacePanelPreferencesHook"
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu"
-import { ChevronDownIcon } from "lucide-react"
-import { useEffect } from "react"
+import { ChevronDownIcon, UserPlus2Icon, UserPlusIcon, WrenchIcon } from "lucide-react"
 
 export const WorkspacePanelHeader = ({workspace})=>{
 
@@ -61,15 +60,17 @@ export const WorkspacePanelHeader = ({workspace})=>{
                                 <>
                                     <DropdownMenuItem
                                         onClick={()=>setOpenPreferencesModal(true)}
-                                        className={'text-sm'}
+                                        className={'text-sm flex items-center'}
                                     >
-                                        Preferences
+                                        <WrenchIcon />
+                                        <span>Preferences</span>
                                     </DropdownMenuItem>
 
                                     <DropdownMenuItem
-                                        className={'text-sm'}
+                                        className={'text-sm flex items-center'}
                                     >
-                                        Invite people to {workspace?.name}
+                                        <UserPlus2Icon />
+                                        <span>Invite people to {workspace?.name}</span>
                                     </DropdownMenuItem>
                                 </>
                             )
