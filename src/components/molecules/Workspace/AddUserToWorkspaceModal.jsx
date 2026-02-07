@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { useGetWorkspaceDetails } from "@/hooks/apis/workspace/useGetWorkspaceDetails"
 import { Copy, MailIcon, PaperclipIcon, QrCodeIcon, SearchIcon } from "lucide-react"
-import { Link } from "react-router-dom"
 import { toast } from "sonner"
 
 export const AddUserToWorkspaceModal = ({open,setOpen})=>{

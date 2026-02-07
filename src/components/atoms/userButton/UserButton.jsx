@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useAuth } from "@/hooks/context/AuthContextHook"
 import { useCreateWorkspaceModal } from "@/hooks/context/CreateWorkspaceModalHook"
-import { LogOutIcon, PencilIcon, SettingsIcon } from "lucide-react"
+import { LogOutIcon, PencilIcon, SettingsIcon, UserIcon } from "lucide-react"
 import { toast } from "sonner"
 
 export const UserButton = ()=>{
@@ -45,6 +45,12 @@ export const UserButton = ()=>{
                     <SettingsIcon className="size-4 mr-2 h-8"/>
                     Settings
                 </DropdownMenuItem>
+
+                <DropdownMenuItem>
+                    <UserIcon className="size-4 mr-2 h-8"/>
+                    Profile
+                </DropdownMenuItem>
+
                 <DropdownMenuItem
                     onClick={handleLogout}
                 >

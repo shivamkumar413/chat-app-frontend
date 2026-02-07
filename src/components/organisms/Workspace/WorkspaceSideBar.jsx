@@ -12,7 +12,7 @@ export const WorkspaceSideBar = ()=>{
 
     return(
         <>
-            <aside className="h-full bg-[#5865F2] w-25 flex flex-col items-center ">
+            <aside className="h-full bg-[#5865F2] w-20 flex flex-col items-center ">
                 <div className="my-2 w-25  flex items-center justify-center">
                     <WorkspaceSwitcher />
                 </div>

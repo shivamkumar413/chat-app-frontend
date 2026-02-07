@@ -8,6 +8,7 @@ import { ProtectedRoute } from "./components/molecules/ProtectedRoute"
 import { WorkspaceLayout } from "./pages/Workspace/Layout"
 import { Channel } from "./pages/Workspace/Channel/Channel"
 import { JoinWorkspace } from "./pages/JoinWorkspace/JoinWorkspace"
+import { WorkspaceRightPanel } from "./components/organisms/Workspace/WorkspaceRightPanel"
 
 
 export const AppRoutes = ()=>{
@@ -16,9 +17,19 @@ export const AppRoutes = ()=>{
             <Route path="/auth/signup" element={ <Auth><SignupCardContainer /></Auth> }/>
             <Route path="/auth/signin" element={ <Auth><SigninCardContainer /></Auth> }/>
             <Route path="/home" element={ <ProtectedRoute><Home /> </ProtectedRoute> }/>
-            <Route path="/workspace/:workspaceId" element={ <ProtectedRoute><WorkspaceLayout>Workspace</WorkspaceLayout></ProtectedRoute> } />
-            <Route path="/workspace/:workspaceId/channel/:channelId" 
-            
+            <Route 
+                path="/workspace/:workspaceId" 
+                element={ 
+                    <ProtectedRoute>
+                        <WorkspaceLayout>
+                            <WorkspaceRightPanel />
+                        </WorkspaceLayout>
+                    </ProtectedRoute> 
+                } 
+            />
+
+            <Route 
+                path="/workspace/:workspaceId/channel/:channelId" 
                 element={
                     <ProtectedRoute>
                         <WorkspaceLayout>
@@ -27,6 +38,7 @@ export const AppRoutes = ()=>{
                     </ProtectedRoute>
                 }
             />
+            
             <Route path="/workspace/join/:workspaceId" element={ <JoinWorkspace /> }/>
             <Route path="/*" element={ <Notfound /> } />
         </Routes>

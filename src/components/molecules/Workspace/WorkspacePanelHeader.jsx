@@ -6,6 +6,7 @@ import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu"
 import { ChevronDownIcon, UserPlus2Icon, UserPlusIcon, WrenchIcon } from "lucide-react"
 import { AddUserToWorkspaceModal } from "./AddUserToWorkspaceModal"
 import { useState } from "react"
+import { WorkspaceDetailModal } from "./WorkspaceDetailModal"
 
 export const WorkspacePanelHeader = ({workspace})=>{
 
@@ -13,6 +14,7 @@ export const WorkspacePanelHeader = ({workspace})=>{
     const { IsUserAdminOfWs,isFetching,isSuccess,error } = useGetIsUserAdminOfWorkspace()
     const { setOpenPreferencesModal } = useWorkspacePanelPreferencesHook()
     const [ open,setOpen ] = useState(false);
+    const [ workspaceModalOpen,setWorkspaceModalOpen ] = useState(false)
 
 
     //console.log("ws response for if user is admin : ",IsUserAdminOfWs?.isUserAdmin)
@@ -21,6 +23,11 @@ export const WorkspacePanelHeader = ({workspace})=>{
             <AddUserToWorkspaceModal 
                 open={open}
                 setOpen={setOpen}
+            />
+
+            <WorkspaceDetailModal 
+                workspaceModalOpen={workspaceModalOpen}
+                setWorkspaceModalOpen={setWorkspaceModalOpen}
             />
             <div className="flex items-center justify-between px-4 h-12.5 gap-0.5">
                 <DropdownMenu>
@@ -42,7 +49,9 @@ export const WorkspacePanelHeader = ({workspace})=>{
                     <DropdownMenuContent 
                         side='bottom' align='start' className='w-64 bg-white rounded-md shadow-lg'
                     >
-                        <DropdownMenuItem>
+                        <DropdownMenuItem
+                            onClick={()=>setWorkspaceModalOpen(true)}
+                        >
                             <div 
                                  className='size-9 relative overflow-hidden text-white font-semibold text-xl rounded-md flex items-center justify-center mr-2 bg-[#616061]'
                             >

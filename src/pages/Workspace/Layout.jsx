@@ -16,7 +16,7 @@ export const WorkspaceLayout = ({children})=>{
     },[isPending,isSuccess])
 
     return(
-        <div className="h-screen">
+        <div className="h-screen overflow-hidden">
             <WorkspaceNavBar />
             <div className="flex h-[calc(100vh-40px)]">
                 <WorkspaceSideBar />
