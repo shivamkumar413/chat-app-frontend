@@ -132,3 +132,24 @@ export const addChannelToWorkspace = async ({workspaceId,channelName,token})=>{
         throw error;
     }
 }
+
+export const addMemberToWorkspaceByJoinCode = async ({workspaceId,joinCode,token})=>{
+    try {
+        const response = await axiosInstance.put(`/workspace/${workspaceId}/join`,
+            {
+                joinCode : joinCode
+            },
+            {
+                headers : {
+                    "x-access-token" : token
+                }
+            }
+        )
+
+        console.log("Response at add member to workspace by join code : ",response);
+        return response?.data?.data;
+    } catch (error) {
+        console.log("Error while adding member to workspace by join code : ",error);
+        throw error;
+    }
+}
