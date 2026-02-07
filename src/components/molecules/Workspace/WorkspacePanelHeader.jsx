@@ -4,17 +4,24 @@ import { useGetIsUserAdminOfWorkspace } from "@/hooks/apis/workspace/useGetIsUse
 import { useWorkspacePanelPreferencesHook } from "@/hooks/context/WorkspacePanelPreferencesHook"
 import { DropdownMenuContent } from "@radix-ui/react-dropdown-menu"
 import { ChevronDownIcon, UserPlus2Icon, UserPlusIcon, WrenchIcon } from "lucide-react"
+import { AddUserToWorkspaceModal } from "./AddUserToWorkspaceModal"
+import { useState } from "react"
 
 export const WorkspacePanelHeader = ({workspace})=>{
 
 
     const { IsUserAdminOfWs,isFetching,isSuccess,error } = useGetIsUserAdminOfWorkspace()
     const { setOpenPreferencesModal } = useWorkspacePanelPreferencesHook()
+    const [ open,setOpen ] = useState(false);
 
 
     //console.log("ws response for if user is admin : ",IsUserAdminOfWs?.isUserAdmin)
     return(
         <>
+            <AddUserToWorkspaceModal 
+                open={open}
+                setOpen={setOpen}
+            />
             <div className="flex items-center justify-between px-4 h-12.5 gap-0.5">
                 <DropdownMenu>
                     <DropdownMenuTrigger>
@@ -67,6 +74,7 @@ export const WorkspacePanelHeader = ({workspace})=>{
                                     </DropdownMenuItem>
 
                                     <DropdownMenuItem
+                                        onClick={()=>setOpen(true)}
                                         className={'text-sm flex items-center'}
                                     >
                                         <UserPlus2Icon />

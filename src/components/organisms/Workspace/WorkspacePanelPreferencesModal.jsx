@@ -42,7 +42,7 @@ export const WorkpacePanelPreferencesModal = ()=>{
     async function handleFormSubmit(e){
         e.preventDefault()
         try {
-            const response = await updateWorkspaceMutate({workspaceId,workspaceName : wsName})
+            const response = await updateWorkspaceMutate({workspaceId : workspaceId,workspaceName : wsName})
             queryClient.invalidateQueries(`workspaceById-${workspaceId}`)
             queryClient.invalidateQueries('fetchworkspaces')
             navigate('/home')
@@ -70,7 +70,7 @@ export const WorkpacePanelPreferencesModal = ()=>{
 
                 <Dialog open={dialogOpen}>
                     <DialogTrigger onClick={()=>setDialogOpen(true)}>
-                        <div className="flex w-full bg-gray-100 py-3 rounded-md justify-between items-center px-2">
+                        <div className="flex w-full bg-white border py-4 mt-4 rounded-md justify-between items-center px-2">
                             <div>
                                 <p className="text-sm font-semibold">Edit Workspace</p>
                                 <p className="text-xs">{workspaceName}</p>
@@ -114,7 +114,7 @@ export const WorkpacePanelPreferencesModal = ()=>{
                  
                 
                 <div 
-                    className="flex w-full bg-gray-100 py-3 rounded-md justify-between items-center px-2 cursor-pointer"
+                    className="flex w-full bg-white border py-4 rounded-md justify-between items-center px-2 cursor-pointer"
                     onClick={handleDelete}
                 >
                     <p  

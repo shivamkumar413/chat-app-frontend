@@ -6,7 +6,9 @@ import { Notfound } from "@/pages/Notfound/Notfound"
 import { Home } from "./pages/Home/Home"
 import { ProtectedRoute } from "./components/molecules/ProtectedRoute"
 import { WorkspaceLayout } from "./pages/Workspace/Layout"
-import { Channel } from "./components/molecules/Channel/Channel"
+import { Channel } from "./pages/Workspace/Channel/Channel"
+import { JoinWorkspace } from "./pages/JoinWorkspace/JoinWorkspace"
+
 
 export const AppRoutes = ()=>{
     return(
@@ -15,7 +17,17 @@ export const AppRoutes = ()=>{
             <Route path="/auth/signin" element={ <Auth><SigninCardContainer /></Auth> }/>
             <Route path="/home" element={ <ProtectedRoute><Home /> </ProtectedRoute> }/>
             <Route path="/workspace/:workspaceId" element={ <ProtectedRoute><WorkspaceLayout>Workspace</WorkspaceLayout></ProtectedRoute> } />
-            <Route path="/workspace/:workspaceId/channel" element={<ProtectedRoute><WorkspaceLayout><Channel></Channel></WorkspaceLayout></ProtectedRoute>}/>
+            <Route path="/workspace/:workspaceId/channel/:channelId" 
+            
+                element={
+                    <ProtectedRoute>
+                        <WorkspaceLayout>
+                            <Channel />
+                        </WorkspaceLayout>
+                    </ProtectedRoute>
+                }
+            />
+            <Route path="/workspace/join/:workspaceId" element={ <JoinWorkspace /> }/>
             <Route path="/*" element={ <Notfound /> } />
         </Routes>
     )

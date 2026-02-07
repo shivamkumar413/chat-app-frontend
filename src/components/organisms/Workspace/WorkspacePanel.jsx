@@ -4,12 +4,14 @@ import { useGetWorkspaceDetails } from "@/hooks/apis/workspace/useGetWorkspaceDe
 import { useCreateChannelModalHook } from "@/hooks/context/CreateChannelModalHook"
 import { useWorkspacePanelPreferencesHook } from "@/hooks/context/WorkspacePanelPreferencesHook"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export const WorkspacePanel = ()=>{
 
     const { workspaceDetails,isPending,isSuccess } = useGetWorkspaceDetails()
-    const { setWorkspaceId,setWorkspaceName } = useWorkspacePanelPreferencesHook()
+    const { workspaceId,setWorkspaceId,setWorkspaceName } = useWorkspacePanelPreferencesHook()
     const { SetIsCreateChannelModalOpen } = useCreateChannelModalHook()
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(isPending) return;
@@ -44,6 +46,7 @@ export const WorkspacePanel = ()=>{
                                 <div 
                                     className="font-semibold text-sm text-white ml-2 cursor-pointer py-1 hover:bg-[#5865F2]" 
                                     key={channel?._id}
+                                    onClick={()=>navigate(`/workspace/${workspaceId}/channel/${channel?._id}`)}
                                 >
                                     {`# ${channel?.name}`}
                                 </div>
