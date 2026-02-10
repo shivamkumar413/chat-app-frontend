@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { useCreateWorkspace } from "@/hooks/apis/workspace/useCreateWorkspace"
 import { useCreateWorkspaceModal } from "@/hooks/context/CreateWorkspaceModalHook"
@@ -61,13 +61,27 @@ export const CreateWorkspaceModal = ()=>{
                         required
                         onChange={(e)=>setWorkspaceName(e.target.value)}
                     />
-
-                    <Button
-                        className={'w-full mt-5'}
-                        size="lg"
+                    <div 
+                        className="flex justify-end items-center"
                     >
-                        Create
-                    </Button>
+                        <DialogClose>
+                            <Button
+                                className={'mt-5 mx-2'}
+                                variant="outline"
+                                size="lg"
+                            >
+                                Cancel
+                            </Button>
+                        </DialogClose>
+                        
+                        <Button
+                            className={'mt-5'}
+                            size="lg"
+                        >
+                            Create
+                        </Button>
+                    </div>
+                    
                 </form>
             </DialogContent>
         </Dialog>

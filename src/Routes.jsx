@@ -39,6 +39,7 @@ export const AppRoutes = ()=>{
                 }
             />
             
+            
             <Route path="/workspace/join/:workspaceId" element={ <JoinWorkspace /> }/>
             <Route path="/*" element={ <Notfound /> } />
         </Routes>
