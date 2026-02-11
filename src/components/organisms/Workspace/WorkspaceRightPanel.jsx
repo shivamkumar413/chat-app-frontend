@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button"
+import { useCountdownModalContextHook } from "@/hooks/context/CountdownModalContextHook"
 import { useCreateWorkspaceModal } from "@/hooks/context/CreateWorkspaceModalHook"
 import { PencilIcon, UserPlus2Icon } from "lucide-react"
 
 export const WorkspaceRightPanel = ()=>{
 
     const { setIsCreateWorkspaceModalOpen } = useCreateWorkspaceModal()
+    const { setCountdownModal } = useCountdownModalContextHook()
 
     function handleCreateWorkspaceModal(){
         setIsCreateWorkspaceModalOpen(true);
@@ -24,6 +26,7 @@ export const WorkspaceRightPanel = ()=>{
                 </Button>
 
                 <Button
+                    onClick={()=>setCountdownModal(true)}
                     className={'bg-gray-600 border-none hover:bg-gray-900 flex flex-col h-auto cursor-pointer'}
                 >
                     <UserPlus2Icon className="size-6 text-gray-200" />
@@ -33,6 +36,7 @@ export const WorkspaceRightPanel = ()=>{
                 </Button>
 
                 <Button
+                    onClick={()=>setCountdownModal(true)}
                     className={'bg-gray-600 border-none hover:bg-gray-900 flex flex-col h-auto cursor-pointer'}
                 >
                     <img 

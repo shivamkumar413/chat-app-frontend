@@ -4,8 +4,10 @@ import { CreateWorkspaceContextProvider } from "./createWorkspaceModalContext";
 import { WorkspacePanelPreferencesContextProvider } from "./WorkspacePanelPreferencesContext";
 import { CreateChannelModalContextProvider } from "./createChannelModalContext";
 import { countdownContextProvider } from "./countdownModalContext";
+import { SocketContextProvider } from "./SocketContext";
 
 export const AppContextProvider = CombineContext(
+    SocketContextProvider,
     AuthContextProvider,
     CreateWorkspaceContextProvider,
     WorkspacePanelPreferencesContextProvider,
