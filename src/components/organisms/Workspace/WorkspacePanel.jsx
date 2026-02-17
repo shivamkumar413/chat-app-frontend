@@ -27,7 +27,7 @@ export const WorkspacePanel = ()=>{
     }
 
     return(
-        <div className="flex flex-col h-full bg-[#5865F2]/80">
+        <div className="flex flex-col h-full bg-gray-800">
             <WorkspacePanelHeader workspace={workspaceDetails} />
             {/* <div className="ml-2 text-white">
                 <PlusSquareIcon 
@@ -45,7 +45,7 @@ export const WorkspacePanel = ()=>{
                         return(
                             <>
                                 <div 
-                                    className="font-semibold text-sm text-white ml-2 cursor-pointer py-1 hover:bg-[#5865F2]" 
+                                    className="font-semibold text-sm text-gray-300 mx-2 px-2 rounded-md cursor-pointer py-1 hover:bg-gray-900" 
                                     key={channel?._id}
                                     onClick={()=>navigate(`/workspace/${workspaceIdParams}/channel/${channel?._id}`)}
                                 >

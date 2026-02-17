@@ -9,6 +9,11 @@ import { WorkspaceLayout } from "./pages/Workspace/Layout"
 import { Channel } from "./pages/Workspace/Channel/Channel"
 import { JoinWorkspace } from "./pages/JoinWorkspace/JoinWorkspace"
 import { WorkspaceRightPanel } from "./components/organisms/Workspace/WorkspaceRightPanel"
+import { WorkspacePanel } from "./components/organisms/Workspace/WorkspacePanel"
+import { ProfileLeftPanel } from "./components/molecules/Profile/ProfileLeftPanel"
+import { ProfileRightPanel } from "./components/atoms/ProfileRightPanel/ProfileRightPanel"
+import { SettingRightPanel } from "./components/molecules/Settings/SettingRightPanel"
+import { SettingLeftPanel } from "./components/molecules/Settings/SettingLeftPanel"
 
 
 export const AppRoutes = ()=>{
@@ -21,9 +26,10 @@ export const AppRoutes = ()=>{
                 path="/workspace/:workspaceId" 
                 element={ 
                     <ProtectedRoute>
-                        <WorkspaceLayout>
-                            <WorkspaceRightPanel />
-                        </WorkspaceLayout>
+                        <WorkspaceLayout 
+                            children1={<WorkspacePanel />} 
+                            children2={<WorkspaceRightPanel />}
+                        />
                     </ProtectedRoute> 
                 } 
             />
@@ -32,13 +38,37 @@ export const AppRoutes = ()=>{
                 path="/workspace/:workspaceId/channel/:channelId" 
                 element={
                     <ProtectedRoute>
-                        <WorkspaceLayout>
-                            <Channel />
-                        </WorkspaceLayout>
+                        <WorkspaceLayout 
+                            children1={<WorkspacePanel />} 
+                            children2={<Channel />}
+                        />
                     </ProtectedRoute>
                 }
             />
             
+            <Route 
+                path="/profile/workspace/:workspaceId"
+                element={
+                    <ProtectedRoute>
+                        <WorkspaceLayout 
+                            children1={<ProfileLeftPanel />}
+                            children2={<ProfileRightPanel />}
+                        />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route 
+                path="/settings/workspace/:workspaceId"
+                element={
+                    <ProtectedRoute>
+                        <WorkspaceLayout 
+                            children1={<SettingLeftPanel />}
+                            children2={<SettingRightPanel />}
+                        />
+                    </ProtectedRoute>
+                }
+            />
             
             <Route path="/workspace/join/:workspaceId" element={ <JoinWorkspace /> }/>
             <Route path="/*" element={ <Notfound /> } />

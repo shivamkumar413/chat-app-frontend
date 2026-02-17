@@ -1,4 +1,5 @@
 import { useChannelMessage } from "@/hooks/context/useChannelMessage";
+import { useQueryClient } from "@tanstack/react-query";
 import { createContext, useState } from "react";
 import { io } from "socket.io-client";
 
@@ -7,14 +8,19 @@ const SocketContext = createContext();
 export const SocketContextProvider = ({children})=>{
 
     const [currentChannel,setCurrentChannel] = useState();
-    const { messageList,setMessageList } = useChannelMessage()
+    const { messageList,setMessageList } = useChannelMessage();
+    const queryClient = useQueryClient()
 
     const socket = io('http://localhost:3000');
 
     socket.on('message',(data)=>{
         console.log("New message recieved : ",data);
-        setMessageList([...messageList,data])
-        console.log(messageList)
+        console.log("message list before change : ",messageList);
+        setMessageList([...messageList,data]);
+        console.log("message list after change : ",messageList);
+        
+        queryClient.invalidateQueries('fetchchannelmessages');
+        //console.log(messageList)
     })
 
     async function joinChannel(channelId){

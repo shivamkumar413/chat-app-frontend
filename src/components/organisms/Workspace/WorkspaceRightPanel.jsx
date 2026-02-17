@@ -13,7 +13,7 @@ export const WorkspaceRightPanel = ()=>{
     }
 
     return(
-        <div className="w-full h-full bg-gray-900 flex justify-center items-center">
+        <div className="w-full h-full bg-gray-700 flex justify-center items-center">
             <div className="flex gap-x-5">
                 <Button
                     className={'bg-gray-600 border-none hover:bg-gray-900 flex flex-col h-auto cursor-pointer'}

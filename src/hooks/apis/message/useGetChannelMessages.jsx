@@ -11,7 +11,7 @@ export function useGetChannelMessages(){
     const { isPending,isSuccess,data : channelMessages,error } = useQuery({
         queryFn : ()=>getPaginatedMessage(channelId,auth?.token),
         queryKey : ['fetchchannelmessages',channelId],
-        staleTime : 10000,
+        staleTime : 0,
     })
 
     return {

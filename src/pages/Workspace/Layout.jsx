@@ -6,7 +6,7 @@ import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/componen
 import { useGetWorkspaceDetails } from "@/hooks/apis/workspace/useGetWorkspaceDetails"
 import { useEffect } from "react"
 
-export const WorkspaceLayout = ({children})=>{
+export const WorkspaceLayout = ({children1,children2})=>{
 
     const {workspaceDetails,isPending,isSuccess} = useGetWorkspaceDetails()
 
@@ -29,12 +29,12 @@ export const WorkspaceLayout = ({children})=>{
                         minSize={0}
                             className="bg-[#5865F2]/80"
                     >
-                        <WorkspacePanel />
+                        {children1}
                     </ResizablePanel>
                     <ResizableHandle withHandle />
 
                     <ResizablePanel>
-                        {children}
+                        {children2}
                     </ResizablePanel>
                 </ResizablePanelGroup>
             </div>

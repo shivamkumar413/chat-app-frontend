@@ -6,12 +6,13 @@ import { useGetChannelMessages } from "@/hooks/apis/message/useGetChannelMessage
 import { useChannelMessage } from "@/hooks/context/useChannelMessage";
 import { useSocketHook } from "@/hooks/context/useSocketHook";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom"
 
 export const Channel = ()=>{
 
     const queryClient = useQueryClient()
+    const channelMessageRef = useRef()
     const { channelId } = useParams();
     const { channelData,isPending,error } = useGetChannelById(channelId)
     const { joinChannel } = useSocketHook()
@@ -22,11 +23,24 @@ export const Channel = ()=>{
 
     useEffect(() => {
         queryClient.invalidateQueries('fetchchannelmessages');
+        channelMessageRef?.current?.scrollIntoView(
+                { 
+                    behavior: 'smooth',
+                    block: "end"
+                }
+        )
     }, [channelId]);
 
     useEffect(()=>{
-        if(isSuccess)
+        if(isSuccess){
             setMessageList(channelMessages.reverse())
+            if(channelMessageRef.current) channelMessageRef?.current?.scrollIntoView(
+                { 
+                    behavior: 'smooth',
+                    block: "end"
+                }
+            )
+        }       
     },[channelMessages,isSuccess,channelId])
 
     useEffect(()=>{
@@ -34,19 +48,25 @@ export const Channel = ()=>{
         joinChannel(channelId);
     },[isPending])
     // console.log("Channel data at channel : ",channelData)
+
     return(
-        <div className="h-screen flex flex-col">
+        <div 
+            className="h-screen flex flex-col"
+        >
 
             {/* Channel
             {channelId} */}
             <ChannelHeader name={channelData?.name}/>
 
-            <div className="flex-1 overflow-y-auto">
+            <div 
+                className="flex-1 overflow-y-auto"
+                ref={channelMessageRef}
+            >
                 {messageList?.map((message)=>{
                     return(
                         <>
                             {/* <div>{message?.body}</div> */}
-                            <MessageButton message={message}/>
+                            <MessageButton message={message}  />
                         </>
                     )
                 })}

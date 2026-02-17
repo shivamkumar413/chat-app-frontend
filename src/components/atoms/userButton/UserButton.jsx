@@ -3,12 +3,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { useAuth } from "@/hooks/context/AuthContextHook"
 import { useCreateWorkspaceModal } from "@/hooks/context/CreateWorkspaceModalHook"
 import { LogOutIcon, PencilIcon, SettingsIcon, UserIcon } from "lucide-react"
+import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "sonner"
 
 export const UserButton = ()=>{
 
     const {auth,setAuth} = useAuth()
     const { setIsCreateWorkspaceModalOpen } = useCreateWorkspaceModal()
+    const navigate = useNavigate()
+    const {workspaceId} = useParams()
 
     async function handleLogout(){
         localStorage.removeItem('user')
@@ -41,12 +44,17 @@ export const UserButton = ()=>{
                     <PencilIcon className="size-4 mr-2 h-8"/>
                     Create Workspace
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+
+                <DropdownMenuItem
+                    onClick={()=>navigate(`/settings/workspace/${workspaceId}`)}
+                >
                     <SettingsIcon className="size-4 mr-2 h-8"/>
                     Settings
                 </DropdownMenuItem>
 
-                <DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={()=>navigate(`/profile/workspace/${workspaceId}`)}
+                >
                     <UserIcon className="size-4 mr-2 h-8"/>
                     Profile
                 </DropdownMenuItem>

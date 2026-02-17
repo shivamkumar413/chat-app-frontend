@@ -8,9 +8,9 @@ export const ChannelHeader = ({name})=>{
         <div className="w-full ">
             <Dialog>
                 <DialogTrigger>
-                    <Button
+                     <Button
                         variant="ghost"
-                        className="text-lg font-semibold px-2 w-auto overflow-hidden"
+                        className="text-lg font-semibold px-2 overflow-hidden w-auto flex border-b"
                     >
                         <span># {name} </span>
                         <ChevronDown className='size-3 ml-2' />

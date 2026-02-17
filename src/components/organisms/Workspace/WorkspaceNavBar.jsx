@@ -13,7 +13,7 @@ export const WorkspaceNavBar = ()=>{
     }
     return(
         <nav 
-            className="bg-[#5865F2] w-screen h-10 flex items-center justify-center p-1.5"
+            className="bg-gray-900 w-screen h-10 flex items-center justify-center p-1.5"
         >
             <div className="w-1/3" />
             <div className="flex itmes-center">
