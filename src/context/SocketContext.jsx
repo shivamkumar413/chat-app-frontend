@@ -1,7 +1,8 @@
 import { useChannelMessage } from "@/hooks/context/useChannelMessage";
 import { useQueryClient } from "@tanstack/react-query";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import { toast } from "sonner";
 
 const SocketContext = createContext();
 
@@ -9,7 +10,13 @@ export const SocketContextProvider = ({children})=>{
 
     const [currentChannel,setCurrentChannel] = useState();
     const { messageList,setMessageList } = useChannelMessage();
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
+    
+    useEffect(()=>{
+        socket.on("sentNotificationforincomingfriendrequest",(data)=>{
+            toast.info("Recieved friend request")
+        })
+    })
 
     const socket = io('http://localhost:3000');
 
@@ -39,8 +46,24 @@ export const SocketContextProvider = ({children})=>{
         });
     }
 
+    async function loginSocket({userId}){
+        //console.log("user id at login socket : ",userId);
+        socket.emit("login",{
+            userId : userId
+        })
+    }
+
+    async function sendNotificationToRecipient({requesterId,recipientId}){
+        console.log("at send notification ");
+        socket.emit("sendfriendrequest",{
+            requesterId : requesterId,
+            recipientId : recipientId
+        })
+    }
+
     return(
-        <SocketContext.Provider value={{currentChannel,joinChannel,SendMessage}}>
+        <SocketContext.Provider 
+            value={{currentChannel,joinChannel,SendMessage,socket,loginSocket,sendNotificationToRecipient}}>
             {children}
         </SocketContext.Provider>
     )

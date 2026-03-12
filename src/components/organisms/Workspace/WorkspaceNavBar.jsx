@@ -1,10 +1,13 @@
+import { AddFriendsModal } from "@/components/molecules/Friendship/AddFriendsModal"
 import { Button } from "@/components/ui/button"
 import { useGetWorkspaceDetails } from "@/hooks/apis/workspace/useGetWorkspaceDetails"
 import { InfoIcon, LucideLoader2, SearchIcon, UserPlus2Icon } from "lucide-react"
+import { useState } from "react"
 
 export const WorkspaceNavBar = ()=>{
 
     const { isPending,workspaceDetails } = useGetWorkspaceDetails()
+    const [openAddFriendsModal,setOpenAddFriendsModal] = useState(false);
     console.log("workspace details at navbar : ",workspaceDetails)
     if(isPending){
         return(
@@ -12,6 +15,11 @@ export const WorkspaceNavBar = ()=>{
         )
     }
     return(
+        <>
+        <AddFriendsModal 
+            open={openAddFriendsModal}
+            setOpen={setOpenAddFriendsModal}
+        />
         <nav 
             className="bg-gray-900 w-screen h-10 flex items-center justify-center p-1.5"
         >
@@ -27,8 +35,10 @@ export const WorkspaceNavBar = ()=>{
                     </span>
                 </Button>
 
-                <Button size="sm"
-                    className='ml-4 bg-accent/25 hover:bg-accent/15 h-7 px-2'
+                <Button 
+                    onClick={()=>setOpenAddFriendsModal(true)}
+                    size="sm"
+                    className='ml-4 bg-accent/25 hover:bg-accent/15 h-7 px-2 cursor-pointer'
                 >
                         <UserPlus2Icon className="size-5 text-white "/>
                     <span className="text-white text-sm">Add Friends</span>
@@ -45,5 +55,6 @@ export const WorkspaceNavBar = ()=>{
                 </Button>
             </div>
         </nav>
+        </>
     )
 }
