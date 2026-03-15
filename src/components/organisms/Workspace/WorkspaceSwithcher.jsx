@@ -15,13 +15,14 @@ export const WorkspaceSwitcher = ()=>{
     console.log("all workspaces at ws switcher : ",workspaces)
 
     return(
-        <DropdownMenu>
+        <DropdownMenu
+        >
             <DropdownMenuTrigger>
                 <Button
-                    className={'size-12 relative overflow-hidden bg-[#2B2D31] hover:bg-[#35363C] font-semibold text-xl'}
+                    className={'w-full relative overflow-hidden bg-green-400 hover:bg-green-300 font-semibold text-xl my-1'}
                     
                 >
-                    {isPending ? <LucideLoader2 className="animate-spin size-5"/> : workspaceDetails?.name[0].toUpperCase()}
+                    {isPending ? <LucideLoader2 className="animate-spin size-5"/> : workspaceDetails?.name}
                 </Button>
             </DropdownMenuTrigger>
 

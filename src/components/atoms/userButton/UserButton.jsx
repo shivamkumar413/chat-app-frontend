@@ -11,7 +11,7 @@ export const UserButton = ()=>{
     const {auth,setAuth} = useAuth()
     const { setIsCreateWorkspaceModalOpen } = useCreateWorkspaceModal()
     const navigate = useNavigate()
-    const {workspaceId} = useParams()
+    //const {workspaceId} = useParams()
 
     async function handleLogout(){
         localStorage.removeItem('user')
@@ -46,14 +46,14 @@ export const UserButton = ()=>{
                 </DropdownMenuItem>
 
                 <DropdownMenuItem
-                    onClick={()=>navigate(`/settings/workspace/${workspaceId}`)}
+                    onClick={()=>navigate(`/settings`)}
                 >
                     <SettingsIcon className="size-4 mr-2 h-8"/>
                     Settings
                 </DropdownMenuItem>
 
                 <DropdownMenuItem
-                    onClick={()=>navigate(`/profile/workspace/${workspaceId}`)}
+                    onClick={()=>navigate(`/profile`)}
                 >
                     <UserIcon className="size-4 mr-2 h-8"/>
                     Profile

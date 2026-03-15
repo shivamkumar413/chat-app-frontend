@@ -5,13 +5,13 @@ export const SettingLeftPanel = ()=>{
 
     const { auth } = useAuth()
     const navigate = useNavigate()
-    const {workspaceId} = useParams()
+    //const {workspaceId} = useParams()
 
     return(
         <div className="bg-gray-800 h-screen  ">
             <header 
                 className="border-b border-gray-500 py-2 flex items-center cursor-pointer"
-                onClick={()=>navigate(`/profile/workspace/${workspaceId}`)}
+                onClick={()=>navigate(`/profile`)}
             >
                 <img 
                     className="w-15 h-15 rounded-full"

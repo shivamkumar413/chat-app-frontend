@@ -6,14 +6,14 @@ import { useState } from "react"
 
 export const WorkspaceNavBar = ()=>{
 
-    const { isPending,workspaceDetails } = useGetWorkspaceDetails()
+    // const { isPending,workspaceDetails } = useGetWorkspaceDetails()
     const [openAddFriendsModal,setOpenAddFriendsModal] = useState(false);
-    console.log("workspace details at navbar : ",workspaceDetails)
-    if(isPending){
-        return(
-            <LucideLoader2 className="animate-spin ml-2" />
-        )
-    }
+    //console.log("workspace details at navbar : ",workspaceDetails)
+    // if(isPending){
+    //     return(
+    //         <LucideLoader2 className="animate-spin ml-2" />
+    //     )
+    // }
     return(
         <>
         <AddFriendsModal 
@@ -31,7 +31,7 @@ export const WorkspaceNavBar = ()=>{
                 >
                     <SearchIcon className="size-5 text-white mr-2"/>
                     <span className="text-white text-xs">
-                        Search {workspaceDetails?.name || 'workspace'}
+                        Search 
                     </span>
                 </Button>
 

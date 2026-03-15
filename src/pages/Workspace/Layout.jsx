@@ -8,12 +8,12 @@ import { useEffect } from "react"
 
 export const WorkspaceLayout = ({children1,children2})=>{
 
-    const {workspaceDetails,isPending,isSuccess} = useGetWorkspaceDetails()
+    // const {workspaceDetails,isPending,isSuccess} = useGetWorkspaceDetails()
 
-    useEffect(()=>{
-        if(isPending) return
-        console.log("Workspace details : ",workspaceDetails)
-    },[isPending,isSuccess])
+    // useEffect(()=>{
+    //     if(isPending) return
+    //     console.log("Workspace details : ",workspaceDetails)
+    // },[isPending,isSuccess])
 
     return(
         <div className="h-screen overflow-hidden">

@@ -14,6 +14,8 @@ import { ProfileLeftPanel } from "./components/molecules/Profile/ProfileLeftPane
 import { ProfileRightPanel } from "./components/atoms/ProfileRightPanel/ProfileRightPanel"
 import { SettingRightPanel } from "./components/molecules/Settings/SettingRightPanel"
 import { SettingLeftPanel } from "./components/molecules/Settings/SettingLeftPanel"
+import { Request } from "./pages/Requests/Request"
+import { RequestSent } from "./pages/Requests/RequestSent"
 
 
 export const AppRoutes = ()=>{
@@ -22,6 +24,8 @@ export const AppRoutes = ()=>{
             <Route path="/auth/signup" element={ <Auth><SignupCardContainer /></Auth> }/>
             <Route path="/auth/signin" element={ <Auth><SigninCardContainer /></Auth> }/>
             <Route path="/home" element={ <ProtectedRoute><Home /> </ProtectedRoute> }/>
+            <Route path="/requests/recieved" element={<Request />}/>
+            <Route path="/requests/sent" element={<RequestSent />}/>
             <Route 
                 path="/workspace/:workspaceId" 
                 element={ 
@@ -47,7 +51,7 @@ export const AppRoutes = ()=>{
             />
             
             <Route 
-                path="/profile/workspace/:workspaceId"
+                path="/profile"
                 element={
                     <ProtectedRoute>
                         <WorkspaceLayout 
@@ -59,7 +63,7 @@ export const AppRoutes = ()=>{
             />
 
             <Route 
-                path="/settings/workspace/:workspaceId"
+                path="/settings"
                 element={
                     <ProtectedRoute>
                         <WorkspaceLayout 

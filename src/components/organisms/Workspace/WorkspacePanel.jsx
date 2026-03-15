@@ -5,6 +5,7 @@ import { useCreateChannelModalHook } from "@/hooks/context/CreateChannelModalHoo
 import { useWorkspacePanelPreferencesHook } from "@/hooks/context/WorkspacePanelPreferencesHook"
 import { useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import { WorkspaceSwitcher } from "./WorkspaceSwithcher"
 
 export const WorkspacePanel = ()=>{
 
@@ -28,6 +29,7 @@ export const WorkspacePanel = ()=>{
 
     return(
         <div className="flex flex-col h-full bg-gray-800">
+            <WorkspaceSwitcher />
             <WorkspacePanelHeader workspace={workspaceDetails} />
             {/* <div className="ml-2 text-white">
                 <PlusSquareIcon 
@@ -35,6 +37,7 @@ export const WorkspacePanel = ()=>{
                     onClick={handleChannelModalOpen}    
                 />
             </div> */}
+            
 
             <WorkspacePanelSection
                 label={'channels'}

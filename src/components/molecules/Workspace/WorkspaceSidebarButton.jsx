@@ -1,7 +1,7 @@
 export const WorkspaceSideBarButton = ({Icon,name,onClickHandler})=>{
     return(
         <div 
-            className="border-b border-gray-300 h-18 w-20 flex flex-col items-center justify-center"
+            className="border-b border-gray-300 hover:bg-gray-800 cursor-pointer transition-all h-18 w-20 flex flex-col items-center justify-center"
             onClick={onClickHandler}
         >
             <div>
