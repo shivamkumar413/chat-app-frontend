@@ -38,8 +38,25 @@ export const getAllRecievedFriendRequest = async ({token})=>{
     }
 }
 
+export const getAllSentFriendRequest = async({token})=>{
+    try {
+        const response = await axiosInstance.get(`friendship/sent-pending`,
+            {
+                headers : {
+                    "x-access-token" : token,
+                }
+            }
+        )
+
+        return response?.data?.data;
+    } catch (error) {
+        console.log("Error while getting all sent friend request : ",error);
+        throw error;
+    }
+}
+
 export const acceptFriendRequest = async({friendshipId,token})=>{
-    console.log(friendshipId,token)
+    //console.log(friendshipId,token)
     try {
         const response = await axiosInstance.patch(`friendship/accept/${friendshipId}`,
             {},
@@ -50,9 +67,27 @@ export const acceptFriendRequest = async({friendshipId,token})=>{
             }
         )
 
-        return response?.data.data;
+        return response?.data?.data;
     } catch (error) {
         console.log("Error while accepting friend request : ",error);
+        throw error;
+    }
+}
+
+export const declineFriendRequest = async({friendRequestId,token})=>{
+    console.log("token at decline frnd req : ",token);
+    try {
+        const response = await axiosInstance.delete(`/friendship/decline/${friendRequestId}`,
+            {
+                headers : {
+                    "x-access-token" : token
+                }
+            }
+        )
+
+        return response?.data?.data;
+    } catch (error) {
+        console.log("Error while declining friend request : ",error);
         throw error;
     }
 }
