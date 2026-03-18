@@ -110,3 +110,19 @@ export const getAllFriends = async({token})=>{
         throw error;
     }
 }
+
+export const getFriendDetailByfriendshipId = async({friendshipId,token})=>{
+    try {
+        const response = await axiosInstance.get(`/friendship/${friendshipId}/friend-detail`,
+            {
+                headers : {
+                    "x-access-token" : token
+                }
+            }
+        );
+        return response?.data?.data;
+    } catch (error) {
+        console.log("Error while getting friend detail by id : ",error);
+        throw error;
+    }
+}

@@ -19,7 +19,7 @@ export const Channel = ()=>{
     const { channelMessages,isSuccess } = useGetChannelMessages()
     const { messageList,setMessageList } = useChannelMessage()
 
-    console.log("channel messages : ",channelMessages)
+    //console.log("channel messages : ",channelMessages)
 
     useEffect(() => {
         queryClient.invalidateQueries('fetchchannelmessages');
@@ -48,6 +48,7 @@ export const Channel = ()=>{
         joinChannel(channelId);
     },[isPending])
     // console.log("Channel data at channel : ",channelData)
+    
 
     return(
         <div 
