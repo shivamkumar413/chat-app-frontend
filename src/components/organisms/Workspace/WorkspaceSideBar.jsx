@@ -30,6 +30,7 @@ export const WorkspaceSideBar = ()=>{
                     <WorkspaceSideBarButton 
                         Icon={MessageCircleMore}
                         name={"DM's"}
+                        onClickHandler={()=>navigate('/dm')}
                     />
 
                     <WorkspaceSideBarButton

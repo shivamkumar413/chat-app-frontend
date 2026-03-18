@@ -27,7 +27,7 @@ export const WorkspaceLayout = ({children1,children2})=>{
                     <ResizablePanel
                         defaultSize={200}
                         minSize={0}
-                            className="bg-[#5865F2]/80"
+                            className="bg-gray-700"
                     >
                         {children1}
                     </ResizablePanel>

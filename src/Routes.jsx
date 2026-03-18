@@ -16,6 +16,8 @@ import { SettingRightPanel } from "./components/molecules/Settings/SettingRightP
 import { SettingLeftPanel } from "./components/molecules/Settings/SettingLeftPanel"
 import { Request } from "./pages/Requests/Request"
 import { RequestSent } from "./pages/Requests/RequestSent"
+import { DirectMessageLeftPanel } from "./components/organisms/DirectMessage/DirectMessageLeftPanel"
+import { DirectMessageRightPanel } from "./components/organisms/DirectMessage/DirectMessageRightPanel"
 
 
 export const AppRoutes = ()=>{
@@ -45,6 +47,32 @@ export const AppRoutes = ()=>{
                         <WorkspaceLayout 
                             children1={<WorkspacePanel />} 
                             children2={<Channel />}
+                        />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route 
+                path="/dm"
+                element={
+                    <ProtectedRoute>
+                        <WorkspaceLayout 
+                            children1={<DirectMessageLeftPanel />}
+                            children2={<WorkspaceRightPanel />}
+
+                        />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route 
+                path="/dm/:friendshipId"
+                element={
+                    <ProtectedRoute>
+                        <WorkspaceLayout 
+                            children1={<DirectMessageLeftPanel />}
+                            children2={<DirectMessageRightPanel />}
+
                         />
                     </ProtectedRoute>
                 }

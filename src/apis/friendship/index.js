@@ -91,3 +91,22 @@ export const declineFriendRequest = async({friendRequestId,token})=>{
         throw error;
     }
 }
+
+export const getAllFriends = async({token})=>{
+    try {
+        console.log("triggered get all friends : ");
+        const response = await axiosInstance.get(`/friendship/friends`,
+            {
+                headers : {
+                    "x-access-token" : token
+                }
+            }
+        );
+        console.log("response at get all friends : ",response?.data.data);
+        
+        return response?.data.data
+    } catch (error) {
+        console.log("Error while fetching all friends : ",error);
+        throw error;
+    }
+}

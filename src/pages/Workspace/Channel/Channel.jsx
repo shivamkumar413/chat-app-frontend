@@ -56,7 +56,9 @@ export const Channel = ()=>{
 
             {/* Channel
             {channelId} */}
-            <ChannelHeader name={channelData?.name}/>
+            <ChannelHeader 
+                name={channelData?.name}
+            />
 
             <div 
                 className="flex-1 overflow-y-auto"

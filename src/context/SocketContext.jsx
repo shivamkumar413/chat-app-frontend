@@ -37,6 +37,12 @@ export const SocketContextProvider = ({children})=>{
         });
     }
 
+    async function joinDirectChatRoom(friendshipId){
+        socket.emit('join-dc-room',{friendshipId},(data)=>{
+            console.log("successfully joinded the channel ",data);
+        })
+    }
+
     async function SendMessage({channelId,workspaceId,messageContent,senderId}){
         socket.emit('message',{
             body : messageContent,
@@ -44,6 +50,14 @@ export const SocketContextProvider = ({children})=>{
             workspaceId,
             channelId
         });
+    }
+
+    async function sendDirectMessage({messageContent,senderId,friendshipId}){
+        socket.emit('direct-message',{
+            body : messageContent,
+            senderId,
+            friendshipId
+        })
     }
 
     async function loginSocket({userId}){
@@ -63,7 +77,7 @@ export const SocketContextProvider = ({children})=>{
 
     return(
         <SocketContext.Provider 
-            value={{currentChannel,joinChannel,SendMessage,socket,loginSocket,sendNotificationToRecipient}}>
+            value={{currentChannel,joinChannel,joinDirectChatRoom,SendMessage,sendDirectMessage,socket,loginSocket,sendNotificationToRecipient}}>
             {children}
         </SocketContext.Provider>
     )
