@@ -7,10 +7,11 @@ import { useParams } from "react-router-dom";
 
 export const Editor = ()=>{
     
-    const {workspaceId,channelId} = useParams()
+    const {workspaceId,channelId,friendshipId} = useParams()
     const { auth } = useAuth()
     const textAreaRef = useRef();
-    const { SendMessage } = useSocketHook();
+    const { SendMessage, sendDirectMessage } = useSocketHook();
+    
     const [keyPressed,setKeyPressed] = useState({
         isShiftPressed : false,
         isEnterPressed : false,
@@ -39,14 +40,25 @@ export const Editor = ()=>{
             return;
         }
         // if(e.key === 'enter') console.log("enter clicked")
-        await SendMessage(
-            {
-                workspaceId : workspaceId,
-                channelId : channelId,
-                senderId : auth?.user?._id,
-                messageContent : textAreaRef.current.value
-            }
-        )
+        if(channelId){
+            await SendMessage(
+                {
+                    workspaceId : workspaceId,
+                    channelId : channelId,
+                    senderId : auth?.user?._id,
+                    messageContent : textAreaRef.current.value
+                }
+            )
+        }else if(friendshipId){
+            await sendDirectMessage(
+                {
+                    senderId : auth?.user?._id,
+                    friendshipId : friendshipId,
+                    messageContent : textAreaRef.current.value
+                }
+            )
+        }
+        
         textAreaRef.current.value = ''
     }
 

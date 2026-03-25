@@ -21,13 +21,20 @@ export const SocketContextProvider = ({children})=>{
     const socket = io('http://localhost:3000');
 
     socket.on('message',(data)=>{
-        console.log("New message recieved : ",data);
-        console.log("message list before change : ",messageList);
+        //console.log("New message recieved : ",data);
+        //console.log("message list before change : ",messageList);
         setMessageList([...messageList,data]);
-        console.log("message list after change : ",messageList);
+        //console.log("message list after change : ",messageList);
         
         queryClient.invalidateQueries('fetchchannelmessages');
+        
         //console.log(messageList)
+    })
+    
+    socket.on('direct-message',(data)=>{
+        console.log("new msg recieved at direct chat ",data);
+        setMessageList([...messageList,data]);
+        queryClient.invalidateQueries('directchatmessage')
     })
 
     async function joinChannel(channelId){
@@ -38,6 +45,7 @@ export const SocketContextProvider = ({children})=>{
     }
 
     async function joinDirectChatRoom(friendshipId){
+        console.log("at direct chat room send event")
         socket.emit('join-dc-room',{friendshipId},(data)=>{
             console.log("successfully joinded the channel ",data);
         })

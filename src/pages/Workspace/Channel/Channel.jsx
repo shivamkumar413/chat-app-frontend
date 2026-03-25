@@ -23,23 +23,16 @@ export const Channel = ()=>{
 
     useEffect(() => {
         queryClient.invalidateQueries('fetchchannelmessages');
-        channelMessageRef?.current?.scrollIntoView(
-                { 
-                    behavior: 'smooth',
-                    block: "end"
-                }
-        )
+        channelMessageRef?.current?.scrollTo(0,1000);
     }, [channelId]);
 
     useEffect(()=>{
         if(isSuccess){
             setMessageList(channelMessages.reverse())
-            if(channelMessageRef.current) channelMessageRef?.current?.scrollIntoView(
-                { 
-                    behavior: 'smooth',
-                    block: "end"
-                }
-            )
+            if(channelMessageRef.current) channelMessageRef?.current?.scrollTo({
+                top : 1000,
+                behavior : "smooth"
+            });
         }       
     },[channelMessages,isSuccess,channelId])
 

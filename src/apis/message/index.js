@@ -20,7 +20,7 @@ export async function getPaginatedMessage(channelId,token){
 
 export async function getDirectChatMessage({friendshipId,token}){
     try {
-        const response = await axiosInstance.get(`/message/dm/${friendshipId}`,
+        const response = await axiosInstance.get(`/message/dc/${friendshipId}`,
             {
                 headers : {
                     "x-access-token" : token

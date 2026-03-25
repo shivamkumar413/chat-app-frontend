@@ -6,6 +6,19 @@ export const MessageButton = ({message})=>{
     const { auth } = useAuth();
 
     //console.log("auth username and sender id : ",auth?.user?._id,message?.senderId?._id)
+    
+    let hour = message?.createdAt.split("T")[1].split(".")[0].split(":")[0];
+    //console.log(hour)
+    hour = Number(hour)+5;
+    let min = message?.createdAt.split("T")[1].split(".")[0].split(":")[1];
+    min = Number(min) + 30;
+    if(min>60){
+        hour = hour + 1;
+        min = min - 60;
+    }
+    // console.log("Time : ",time)
+    // const messageTime = time[1].split(".");
+    
 
     function handleMessage(){
         //console.log("inside handle message")
@@ -30,9 +43,20 @@ export const MessageButton = ({message})=>{
                     </AvatarFallback>
                 </Avatar>
                
-                <div className="flex flex-col mx-1">
-                    <span className="text-xs font-bold mb-0.5">{message.senderId.username}</span>
-                    <span className="">{message?.body}</span>
+                <div className="flex justify-between mx-1 w-full">
+                    <div className="flex flex-col justify-center w-full">
+                        <span className="text-xs font-bold mb-0.5">{message.senderId.username}</span>
+                        <span className="">{message?.body}</span>
+                    </div>
+                    
+                    
+                    <span
+                        className="text-[10px] font-semibold flex items-end"
+                    >
+                        {hour}:{min}
+                    </span>
+                    
+                    
                 </div>
                 
                 
