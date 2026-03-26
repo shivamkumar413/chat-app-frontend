@@ -1,14 +1,21 @@
+import { MessageButtonOptionModal } from "@/components/molecules/MessageButtonOptionModal/MessageButtonOptionModal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useAuth } from "@/hooks/context/AuthContextHook"
+import { useMessageOptionsModal } from "@/hooks/context/useMessageOptionsModal";
+import { useEffect, useRef } from "react";
 
 export const MessageButton = ({message})=>{
-
+    const {
+        messageOptionModalPosition,
+        setMessageOptionModalPosition,
+        isMessageOptionsModalOpen,
+        setIsMessageOptionsModalOpen,
+        setSelectedElement
+    } = useMessageOptionsModal();
     const { auth } = useAuth();
-
-    //console.log("auth username and sender id : ",auth?.user?._id,message?.senderId?._id)
+    const messageButtonRef = useRef(null);
     
-    let hour = message?.createdAt.split("T")[1].split(".")[0].split(":")[0];
-    //console.log(hour)
+    let hour = message?.createdAt.split("T")[1].split(".")[0].split(":")[0];   
     hour = Number(hour)+5;
     let min = message?.createdAt.split("T")[1].split(".")[0].split(":")[1];
     min = Number(min) + 30;
@@ -16,15 +23,19 @@ export const MessageButton = ({message})=>{
         hour = hour + 1;
         min = min - 60;
     }
-    // console.log("Time : ",time)
-    // const messageTime = time[1].split(".");
-    
+    if(hour >= 24){
+        hour = hour - 24;
+    }
 
+    function handleMessageOptionModalClick(){
+        const element = messageButtonRef?.current;
+        setSelectedElement(message);
+        setIsMessageOptionsModalOpen(true);
+        setMessageOptionModalPosition({top : messageButtonRef?.current.getBoundingClientRect().top,left : messageButtonRef?.current.getBoundingClientRect().left -125})
+    }
+    
     function handleMessage(){
-        //console.log("inside handle message")
-        //console.log("auth username and sender id at handle change: ",auth?.user?._id,message?.senderId?._id)
         if(auth?.user?._id === message?.senderId?._id){
-            console.log("yes true")
             return 'ml-auto'
         } 
         else return ''
@@ -32,7 +43,11 @@ export const MessageButton = ({message})=>{
 
     return(
         <>
-            <div className={`flex rounded-md bg-gray-100 ${handleMessage()} py-2 my-2 mx-2 items-center w-1/2`}>
+            <div 
+                onClick={(e)=>handleMessageOptionModalClick()}
+                className={`flex rounded-md bg-gray-100 hover:bg-gray-300 cursor-pointer transition-colors ${handleMessage()} py-2 my-2 mx-2 items-center w-1/2`}
+                ref={messageButtonRef}
+            >
                 <Avatar>
                     <AvatarImage 
                         src={message?.senderId?.avatar}
@@ -53,15 +68,14 @@ export const MessageButton = ({message})=>{
                     <span
                         className="text-[10px] font-semibold flex items-end"
                     >
-                        {hour}:{min}
+                        {(hour > 9) ? hour : `0${hour}`}:{(min > 9) ? min : `0${min}`}
                     </span>
                     
                     
                 </div>
                 
-                
             </div>
-            {/* <span className={`${handleMessage()} text-xs`}>{message?.createdAt}</span> */}
+            
         </>
     )
 }

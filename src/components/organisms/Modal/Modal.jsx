@@ -2,6 +2,7 @@ import { CreateWorkspaceModal } from "@/components/molecules/createWorkspaceModa
 import { WorkpacePanelPreferencesModal } from "../Workspace/WorkspacePanelPreferencesModal"
 import { CreateChannelModal } from "../Channel/CreateChannelModal"
 import { CountdownModal } from "@/components/molecules/CountdownModal/CountdownModal"
+import { MessageButtonOptionModal } from "@/components/molecules/MessageButtonOptionModal/MessageButtonOptionModal"
 
 export const Modal = ()=>{
     return(
@@ -10,6 +11,7 @@ export const Modal = ()=>{
             <WorkpacePanelPreferencesModal />
             <CreateChannelModal />
             <CountdownModal />
+            <MessageButtonOptionModal />
         </>
     )
 }

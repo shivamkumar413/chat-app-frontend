@@ -4,9 +4,10 @@ import { DirectChatHeader } from "@/components/molecules/DirectMessage/DirectCha
 import { useGetFriendDetailByFriendshipId } from "@/hooks/apis/friendship/useGetFriendDetailByFriendshipId";
 import { useGetDirectChatMessages } from "@/hooks/apis/message/useGetDirectChatMessages";
 import { useChannelMessage } from "@/hooks/context/useChannelMessage";
+import { useMessageOptionsModal } from "@/hooks/context/useMessageOptionsModal";
 import { useSocketHook } from "@/hooks/context/useSocketHook";
 import { useQueryClient } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export const DirectMessageRightPanel = ()=>{
@@ -18,13 +19,7 @@ export const DirectMessageRightPanel = ()=>{
     const { friendDetail,isPendingFriendDetail } = useGetFriendDetailByFriendshipId()
     const { messageList,setMessageList } = useChannelMessage()
     const directMessageRef = useRef();
-
-    //console.log('friend detail at chat page : ',friendDetail);
-    // useEffect(()=>{
-    //     if(directMessageRef.current){
-    //         directMessageRef.current.scrollIntoView({behavior: "instant",block : "end"})
-    //     }
-    // },[messageList])
+    
     useEffect(()=>{
         if(!friendshipId) return;
         joinDirectChatRoom(friendshipId);
@@ -35,15 +30,9 @@ export const DirectMessageRightPanel = ()=>{
     useEffect(()=>{
         if(directChatisSuccess){
             setMessageList(directChatMessages.reverse())
-            // directMessageRef.current?.scrollIntoView(
-            //     { 
-            //         behavior: 'smooth',
-            //         block: "end"
-            //     }
-            // )
             directMessageRef.current?.scrollTo({
                 top : 1000,
-                behavior : "smooth"
+                behavior : "instant"
             });
         }
     },[directChatisSuccess,friendshipId,directChatMessages,messageList])
@@ -52,7 +41,7 @@ export const DirectMessageRightPanel = ()=>{
     
     return(
         <div
-            className="flex flex-col h-screen"
+            className="flex flex-col h-screen bg-gray-700"
         >
             <DirectChatHeader
                 friendDetail={friendDetail}
@@ -64,9 +53,12 @@ export const DirectMessageRightPanel = ()=>{
             >
                 {messageList?.map((message)=>{
                     return(
-                        <>
-                            <MessageButton message={message}/>
-                        </>
+                        <div
+                            key={message?._id}
+                            
+                        >
+                            <MessageButton message={message} />
+                        </div>
                     )
                 })}
             </div>

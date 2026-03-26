@@ -71,6 +71,11 @@ export const Editor = ()=>{
             //setKeyPressed({...keyPressed,isEnterPressed : true})
             await sendMessage()
         }
+
+        if(e.ctrlKey && e.key === 'v'){
+            console.log("paste button clicked")
+            textAreaRef.current.value = await navigator.clipboard.readText()
+        }
  
     }
 

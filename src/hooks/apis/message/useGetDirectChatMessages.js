@@ -13,7 +13,7 @@ export function useGetDirectChatMessages(){
             error : directChatError
         } = useQuery({
             queryFn : ()=>getDirectChatMessage({friendshipId : friendshipId,token : auth?.token}),
-            queryKey : ['directchatmessage'],
+            queryKey : [`directchatmessage-${friendshipId}`],
             staleTime : 10000
         })
     

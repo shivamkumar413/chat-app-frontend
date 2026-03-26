@@ -33,3 +33,22 @@ export async function getDirectChatMessage({friendshipId,token}){
         throw error;
     }
 }
+
+export async function deleteMessage({messageId,token}){
+    try {
+        console.log("message id at axios : ",messageId)
+        console.log("token : ",token);
+        const response = await axiosInstance.delete(`/message/${messageId}`,
+            {
+                headers : {
+                    "x-access-token" : token
+                }
+            }
+        );
+        console.log("successfully deleted : ",response)
+        return response?.data?.data;
+    } catch (error) {
+        console.log("Error while deleting the message : ",error);
+        throw error;
+    }
+}
