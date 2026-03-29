@@ -7,15 +7,19 @@ import { countdownContextProvider } from "./countdownModalContext";
 import { SocketContextProvider } from "./SocketContext";
 import { ChannelMessageContextProvider } from "./ChannelMessage";
 import { MessageOptionsModalContextProvider } from "./MessageOptionsModal";
+import { videocallContextProvider } from "./VideoCallingContext";
 
 export const AppContextProvider = CombineContext(
-    
+    AuthContextProvider,
+    videocallContextProvider,
     ChannelMessageContextProvider,
     SocketContextProvider,
-    AuthContextProvider,
+    
     CreateWorkspaceContextProvider,
     WorkspacePanelPreferencesContextProvider,
     CreateChannelModalContextProvider,
     countdownContextProvider,
     MessageOptionsModalContextProvider,
+    
+    
 )
