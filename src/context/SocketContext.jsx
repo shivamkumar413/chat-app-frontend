@@ -25,7 +25,7 @@ export const SocketContextProvider = ({children})=>{
 
     useEffect(()=>{
         const newPeer = new Peer(auth?.user?._id,{
-            host : 'localhost',
+            host : import.meta.env.PEER_JS_HOST,
             port : 9000,
             path : '/myapp'
         })
